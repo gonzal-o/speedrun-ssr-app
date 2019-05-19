@@ -3,13 +3,19 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 import { Loading } from '../../common';
+import ErrorPage from '../errors/errorPage';
+import GameInfoComponent from './GameInfoComponent';
+import Arrow from '../../icons/leftArrow.png';
 
 const propTypes = {
 	fetchGame: PropTypes.func.isRequired,
-	game: PropTypes.shape({
-		isFetching: PropTypes.bool.isRequired,
-		gameData: PropTypes.object,
-	}),
+	match: PropTypes.object.isRequired,
+	gameData: PropTypes.object,
+	playerInfo: PropTypes.object,
+	videoUrl: PropTypes.string,
+	runs: PropTypes.object,
+	error: PropTypes.bool.isRequired,
+	noData: PropTypes.bool.isRequired,
 };
 
 class GameComponent extends Component {
@@ -21,22 +27,22 @@ class GameComponent extends Component {
 	}
 
 	render() {
-		const { isFetching, gameData, playerInfo, videoUrl, runs } = this.props;
+		const {
+			isFetching,
+			gameData,
+			playerInfo,
+			videoUrl,
+			runs,
+			error,
+			noData,
+		} = this.props;
 
-		if (isFetching || !gameData || !runs) {
-			if (this.props.noData && gameData) {
+		if (isFetching || !runs || error) {
+			if ((noData && gameData) || error) {
 				return (
-					<div className="container">
-						<div className="game-container">
-							<NavLink className={'arrow-back'} to={'/'}>
-								<img src={'/assets/icons/left-arrow.png'} />
-							</NavLink>
-							<div className={'game-info-container'}>
-								<h1>{gameData.game.gameName}</h1>
-								<h1>404 Sorry no runs for this game</h1>
-							</div>
-						</div>
-					</div>
+					<React.Fragment>
+						<ErrorPage gameData={gameData} />
+					</React.Fragment>
 				);
 			} else {
 				return <Loading />;
@@ -45,29 +51,19 @@ class GameComponent extends Component {
 
 		return (
 			<div className="container">
-				<NavLink className={'arrow-back'} to={'/'}>
-					<img src={'/assets/icons/left-arrow.png'} />
+				<NavLink id={'arrow-back'} className={'arrow-back'} to={'/'}>
+					<img src={Arrow} />
 				</NavLink>
-				<div className="game-container">
-					<div className={'game-info-container'}>
-						<h1>{gameData.game.gameName}</h1>
+				<div className={'game-info-container'}>
+					<div className="game-container">
+						<h1 className={'game-title'}>{gameData.game.gameName}</h1>
 						<img src={gameData.game.gameImg} />
 					</div>
-					<div>
-						<div className="game-data">
-							<h4 id={'gameId'}>Game ID: {runs.game}</h4>
-							<h4 id={'gameCategory'}>Category: {runs.category}</h4>
-							<h4 id={'playerInfo'}>Player: {playerInfo.name || 'No name'}</h4>
-						</div>
-						<div className="game-data">
-							<h4 id={'runComment'}>Comment: {runs.comment}</h4>
-							<h4 id={'runDate'}>Date: {runs.date}</h4>
-							<h4 id={'runRealTime'}>Time: {runs.realtime}s</h4>
-						</div>
-						<a target="_blank" href={videoUrl}>
-							Play video
-						</a>
-					</div>
+					<GameInfoComponent
+						playerInfo={playerInfo}
+						videoUrl={videoUrl}
+						runs={runs}
+					/>
 				</div>
 			</div>
 		);

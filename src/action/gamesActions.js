@@ -6,6 +6,7 @@ import {
 	RECEIVE_GAME,
 	NO_RECEIVE_GAME,
 	REQUEST_GAME,
+	ERROR,
 } from './types';
 
 export const fetchGames = sortGames => async dispatch => {
@@ -31,7 +32,6 @@ export const fetchGames = sortGames => async dispatch => {
 			payload: [...first20games.data.data, ...second20games.data.data],
 		});
 	} catch (e) {
-		console.log('fetchGames error: ', e);
 		dispatch({
 			type: RECEIVE_GAMES,
 			payload: [],
@@ -69,6 +69,7 @@ export const fetchGame = id => async dispatch => {
 		const playerData = resPlayer.data.data;
 
 		const playerInfo = {};
+
 		if (playerData.name) {
 			playerInfo['name'] = playerData.name;
 		}
@@ -92,13 +93,13 @@ export const fetchGame = id => async dispatch => {
 				runs,
 				playerInfo: playerInfo,
 				videoUrl: videosUrl,
+				error: false,
 			},
 		});
 	} catch (e) {
-		console.log('fetchGame error: ', e);
 		dispatch({
-			type: RECEIVE_GAME,
-			payload: {},
+			type: ERROR,
+			error: true,
 		});
 	}
 };

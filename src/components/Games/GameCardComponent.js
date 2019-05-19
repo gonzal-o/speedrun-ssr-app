@@ -15,11 +15,10 @@ const gameCard = ({ game }) => {
 			<img
 				width={100}
 				height={100}
-				src={game.assets['cover-medium'].uri || ''}
+				src={game.assets['cover-large'].uri || ''}
 				alt={game.id}
 			/>
 			<div className="games-item-data">
-				{console.log(game)}
 				<h4 id="game-title">
 					{game.names.international.replace(/[^a-zA-Z ]/g, '') ||
 						game.abbreviation}

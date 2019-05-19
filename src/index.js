@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, hydrate } from 'react-dom';
+import { hydrate } from 'react-dom';
 import Router from './router';
 import { Provider } from 'react-redux';
 import store from './store';

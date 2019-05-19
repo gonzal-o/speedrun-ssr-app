@@ -34,7 +34,7 @@ class GamesComponent extends Component {
 		);
 	};
 
-	handleChange = e => {
+	handleSearch = e => {
 		const { gamesData } = this.props.games;
 		const searchTerm = e.target.value;
 		const filterdGamesList = gamesData.filter(game =>
@@ -43,10 +43,10 @@ class GamesComponent extends Component {
 		this.setState({ searchTerm, searching: true, filterdGamesList });
 	};
 
-	handleClickSortGames = async () => {
+	handleClickSort = async () => {
 		const { fetchGames } = this.props;
 		const { sortGames } = this.state;
-		this.setState({ sortGames: !sortGames });
+		this.setState({ sortGames: !sortGames, searching: false });
 		fetchGames(!sortGames);
 	};
 
@@ -64,13 +64,20 @@ class GamesComponent extends Component {
 			<React.Fragment>
 				<div className="container">
 					<div className="games-searchbar">
-						<SearchComponent search={this.handleChange} />
+						<SearchComponent search={this.handleSearch} />
 						<h4>Sort by: </h4>
 						<button
 							id={'sort-btn'}
 							className={'sort-btn'}
-							style={sortGames ? { backgroundColor: 'blue' } : {}}
-							onClick={this.handleClickSortGames}>
+							style={
+								sortGames
+									? {
+											backgroundColor: '#2c3e50',
+											color: 'white',
+									  }
+									: {}
+							}
+							onClick={this.handleClickSort}>
 							Creation Date
 						</button>
 					</div>

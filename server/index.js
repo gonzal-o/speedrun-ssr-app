@@ -1,11 +1,10 @@
 import express from 'express';
-import { renderToString } from 'react-dom/server';
 import { matchRoutes } from 'react-router-config';
 import render from './render';
 import store from '../src/store';
 import Routes from '../src/router/Routes';
 
-const PORT = process.env.PORT || 8084;
+const PORT = process.env.PORT || 8080;
 const app = express();
 
 app.use('/dist', express.static('dist'));

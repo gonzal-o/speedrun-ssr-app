@@ -9,11 +9,24 @@
 - [Babel](https://babeljs.io)
 - [Express](http://expressjs.com/)
 
+- [Mocha](https://mochajs.org)
+- [Chai](https://www.chaijs.com)
+- [Selenium Webdriver](https://www.seleniumhq.org/projects/webdriver/)
+
 ## Getting started
 
 $ yarn 
 $ yarn build
 $ yarn server-build
-$ node server.js
+$ npm start
 
-Service available on `localhost:8079`
+Service available on `localhost:8080`
+
+## For development
+
+$ yarn 
+$ yarn build
+$ yarn server-build
+$ yarn webpack-dev-server
+
+Service available on `localhost:3000`

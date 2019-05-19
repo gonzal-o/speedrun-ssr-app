@@ -10,7 +10,7 @@ module.exports = {
 	devServer: {
 		contentBase: path.join(__dirname),
 		compress: true,
-		port: 3007,
+		port: 3000,
 		historyApiFallback: true,
 	},
 	module: {
@@ -33,6 +33,17 @@ module.exports = {
 					{ loader: 'style-loader' },
 					{ loader: 'css-loader' },
 					{ loader: 'sass-loader' },
+				],
+			},
+			{
+				test: /\.(png|jpg|gif)$/,
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							name: 'dist/[name].[ext]',
+						},
+					},
 				],
 			},
 		],

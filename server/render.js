@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import Routes from '../src/router/Routes';
+import Logo from '../src/icons/trophy.png';
 
 export default (pathname, store, context) => {
 	const content = renderToString(
@@ -19,7 +20,8 @@ export default (pathname, store, context) => {
       <html lang="en">
       <head>
         <meta charset="UTF-8">
-        <title>Title</title>
+        <link rel="shortcut icon" href="${Logo}" />
+        <title>Speedrun</title>
       </head>
       <body>
       
