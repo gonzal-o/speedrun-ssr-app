@@ -1,0 +1,48 @@
+.game-container {
+	display: flex;
+	justify-content: space-around;
+	background-color: lightgrey;
+	padding: 50px;
+	align-items: center;
+	img {
+		width: 400px;
+	}
+
+	.game-data {
+		margin: 24px 0;
+
+		> div {
+			margin: 8px 0;
+			> span {
+				margin-right: 16px;
+			}
+		}
+	}
+
+	.languages {
+		> span {
+			margin-right: 16px;
+		}
+	}
+}
+
+.game-card {
+	border: 1px solid black;
+}
+
+.game-info-container {
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.arrow-back {
+	margin-top: 50px;
+	margin-right: 50px;
+	width: 36px;
+	height: 36px;
+	img {
+		width: 36px;
+	}
+}
